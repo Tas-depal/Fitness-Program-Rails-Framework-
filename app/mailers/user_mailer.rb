@@ -2,7 +2,7 @@ class UserMailer < ApplicationMailer
 
   def welcome_mail(object)
     @object = object
-    mail(to: @object.email, subject: "Welcome #{object.name}") 
+    mail(to: @object['email'], subject: "Welcome #{object['name']}") 
   end
 
   def send_otp(object, otp)

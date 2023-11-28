@@ -17,6 +17,8 @@ gem 'pundit'
 gem 'devise'
 gem 'activeadmin'
 gem 'sass-rails'
+gem 'redis'
+gem "sidekiq", "~> 6.0.7"
 
 gem "rails", "~> 7.0.6"
 

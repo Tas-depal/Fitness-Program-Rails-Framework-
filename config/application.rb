@@ -1,6 +1,8 @@
 require_relative "boot"
 require "rails/all"
 require "sprockets/railtie"
+require "active_model/railtie"
+require "active_job/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -28,6 +30,7 @@ module FitnessProgram
     config.middleware.use ActionDispatch::Flash
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
+    config.active_job.queue_adapter = :sidekiq
     config.api_only = true
   end
 end

@@ -23,8 +23,8 @@ class UsersController < ApiController
   def verify_otp
     user = User.find_by(email: params[:email])
     return render json: { error: "Please Enter valid otp....." } unless params[:otp].to_i == user.otp && user.present?  
-    token = jwt_encode(user_id: user.id)
-    UserMailer.welcome_mail(user).deliver_later
+    token = jwt_encode(user_id: user.id)    
+    BuyTimeWorker.perform_async(user.attributes)
     render json: { message: "Logged in successfully", token: token }
   end
   
