@@ -12,10 +12,18 @@ class UsersController < ApiController
 # ..................Login user......................
   def user_login
     user = User.find_by(email: params[:email], password_digest: params[:password_digest])
-    return render json: { error: "Please Check your Email And Password....." } unless user.present?     
+    return render json: { error: "Please Check your Email And Password....." } unless user.present? 
     otp = rand(3 ** 10)
     user.update(otp: otp)
-    UserMailer.send_otp(user,otp).deliver_later
+    type = params[:type]
+    case type
+    when 'email'  
+      UserMailer.send_otp(user,otp).deliver_later
+    when 'mobile'
+      Twilio::SmsService.new(user.contact_no, user.otp).call
+    else
+      return render json: { error: 'Please give the correct type i.e., "email or mobile"' }
+    end
     render json: { message: "Please enter the otp"}
   end
 

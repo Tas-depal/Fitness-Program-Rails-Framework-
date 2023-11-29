@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_22_094915) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_29_073851) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -96,7 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_22_094915) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.integer "contact_no"
+    t.string "contact_no"
     t.string "type"
     t.string "password_digest"
     t.datetime "created_at", null: false
