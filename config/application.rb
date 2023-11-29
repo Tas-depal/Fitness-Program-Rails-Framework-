@@ -31,6 +31,8 @@ module FitnessProgram
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
     config.active_job.queue_adapter = :sidekiq
-    config.api_only = true
+
+    # To only allow apis
+    # config.api_only = true
   end
 end
