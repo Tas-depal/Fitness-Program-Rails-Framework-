@@ -2,7 +2,7 @@ module Api
   class CategoriesController < ApiController
 
     before_action :find_id, except: [:index, :create]
-    skip_before_action :authenticate_request
+    skip_before_action :authenticate_user!
 
   # ..................Show all categories................... 
     def index

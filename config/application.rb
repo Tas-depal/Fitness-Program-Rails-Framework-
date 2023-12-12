@@ -32,6 +32,15 @@ module FitnessProgram
     config.middleware.use ActionDispatch::Session::CookieStore
     config.active_job.queue_adapter = :sidekiq
 
+  # For devise+jwt
+    # This also configures session_options for use below
+    config.session_store :cookie_store, key: '_interslice_session'
+
+    # Required for all session management (regardless of session_store)
+    config.middleware.use ActionDispatch::Cookies
+
+    config.middleware.use config.session_store, config.session_options
+
     # To only allow apis
     # config.api_only = true
   end

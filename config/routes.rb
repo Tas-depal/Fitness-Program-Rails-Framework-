@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
 
+  # .................User............................
+  devise_scope :user do
+	  post 'user_login' => 'users/sessions#user_login'
+	end
+  devise_for :users, controllers: { 
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
+  }
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
   namespace :api, defaults: { format: :json } do
-    # .................User............................
-    post 'user_login' => 'users#user_login'
-    get 'verify_otp' => 'users#verify_otp'
-    resource :users
 
     # .................Program............................
     post 'create_program_through_category' => 'programs#create_program_through_category'

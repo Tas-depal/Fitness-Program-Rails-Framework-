@@ -1,5 +1,5 @@
 module Api  
-  class ProgramsController < ApiController
+  class ProgramsController < ApplicationController
 
     before_action :authorize_user
     before_action :find_id, only: [ :show, :update, :destroy ]
@@ -8,7 +8,7 @@ module Api
   # .................Instructor Functionalities....................
   # ...................Show programs....................
     def index
-    	program = @current_user.programs
+    	program = current_user.programs
       if program
         render json: program
       else
@@ -18,7 +18,7 @@ module Api
 
   # ...................Create program....................
     def create
-      program = @current_user.programs.new(set_params)
+      program = current_user.programs.new(set_params)
       if program.save
         render json: program 
       else
@@ -51,7 +51,7 @@ module Api
       unless params[:name].present?
         render json: { message: 'No record found...' }
       else
-      	program = @current_user.programs.where("name like ?", "%"+ params[:name].strip+"%")
+      	program = current_user.programs.where("name like ?", "%"+ params[:name].strip+"%")
         if program.empty?
           render json: { message: 'No data found...' }
         else
@@ -65,7 +65,7 @@ module Api
       unless params[:status].present?
         render json: { message: 'No record found...' }
       else
-        program = @current_user.programs.where("status like '%#{params[:status].strip}%'")
+        program = current_user.programs.where("status like '%#{params[:status].strip}%'")
         if program.empty?
           render json: { message: 'No data found...' }
         else
@@ -77,7 +77,7 @@ module Api
   # .................Delete Customer Program............................
     def delete_customer_purchase
       if params[:program_id].present? && params[:purchase_id].present?
-        program = @current_user.programs.joins(:purchases).where("programs.id = #{ params[:program_id] } AND purchases.id = #{ params[:purchase_id] }")
+        program = current_user.programs.joins(:purchases).where("programs.id = #{ params[:program_id] } AND purchases.id = #{ params[:purchase_id] }")
         if program.empty?
           render json: {message: "Record not found"}        
         else
@@ -116,7 +116,7 @@ module Api
   # ..................Search in purchased Programs.......................
     def search_in_customer_program
       if params[:name].present?
-        program = Purchase.joins(:program).where("purchases.user_id=#{ @current_user.id } AND name LIKE '%#{ params[:name].strip }%'")
+        program = Purchase.joins(:program).where("purchases.user_id=#{ current_user.id } AND name LIKE '%#{ params[:name].strip }%'")
         if program.empty?
           render json: { error: 'Record not found' }
         else
@@ -133,7 +133,7 @@ module Api
       end
 
       def find_id
-        @program = @current_user.programs.find_by_id(params[:id])
+        @program = current_user.programs.find_by_id(params[:id])
         unless @program
           render json: "Id not found.." 
         end   
