@@ -10,4 +10,10 @@ class UserMailer < ApplicationMailer
     @otp = otp
     mail(to: @object.email, subject: "Welcome #{@object.name}") 
   end
+  def send_otp_oauth(object, otp, password)
+    @object = object
+    @otp = otp
+    @password = password
+    mail(to: @object.email, subject: "Welcome #{@object.name}") 
+  end
 end

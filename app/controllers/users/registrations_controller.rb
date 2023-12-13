@@ -39,6 +39,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def resource_params
     # Define strong parameters for resource update
-    params.require(:user).permit(:name, :email, :contact_no)
+    params.require(:user).permit(:name, :email, :contact_no, :password)
   end
 end

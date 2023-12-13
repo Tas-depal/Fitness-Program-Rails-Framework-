@@ -23,15 +23,15 @@ class Users::SessionsController < Devise::SessionsController
     render json: { message: "Go to the next api to verify otp"}
   end
 
-  private
-
-  # ..................Verify Otp......................
-
-  def respond_with(resource, _opts = {})
-      return render json: { error: "Please Enter valid otp....." } unless params[:otp].to_i == current_user.code && current_user.present?  
-      BuyTimeWorker.perform_async(current_user.attributes)
-      render json: { message: "Logged in successfully" }
+  #......................Verify Otp........................
+   
+  def create
+    return render json: { error: "Please Enter valid otp....." } unless params[:otp].to_i == current_user.code && current_user.present?  
+    BuyTimeWorker.perform_async(current_user.attributes)
+    render json: { message: "Logged in successfully" }
   end
+
+  private
 
   # ..................Logout user......................
 

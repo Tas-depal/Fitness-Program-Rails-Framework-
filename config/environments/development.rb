@@ -80,11 +80,15 @@ Rails.application.configure do
 
   # Letter opener
   # can be used if want to just preview the mails with fake mail id
-  # config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.delivery_method = :letter_opener
 
 
   # Twilio credentials
   # Log in to your twilio account and specify replace the TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN
   TWILIO_ACCOUNT_SID = 'AXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'.freeze
   TWILIO_AUTH_TOKEN = 'Your Auth token'.freeze
+
+  # google omniauth credentials
+  ENV['GOOGLE_OAUTH_CLIENT_ID'] = Rails.application.credentials.dig(:google_oauth_client_id)
+  ENV['GOOGLE_OAUTH_CLIENT_SECRET'] = Rails.application.credentials.dig(:google_oauth_client_secret)
 end
