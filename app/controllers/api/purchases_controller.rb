@@ -16,11 +16,11 @@ module Api
 
 	# ..................Purchase program.......................
 		def create
-			purchase=current_user.purchases.new(set_params)
+			purchase = current_user.purchases.new(set_params)
 			program = Program.find_by(status: 'active' , id: purchase.program_id)
 			if program
 		    if purchase.save
-					purchase.update(status: 'started')
+					purchase.update(status: 'started', amount: program.price)
 		      render json: purchase, status: :ok
 		    else
 		      render json: { error: purchase.errors.full_messages }

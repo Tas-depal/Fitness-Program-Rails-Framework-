@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_scope :user do
 	  post 'user_login' => 'users/sessions#user_login'
 	end
+
   devise_for :users, controllers: { 
     registrations: 'users/registrations',
     sessions: 'users/sessions',
@@ -31,5 +32,11 @@ Rails.application.routes.draw do
 
     # .................Category.............................
     resources :categories
+
+    # .................Order.............................
+    resources :orders
+
+    # .................Payment.............................
+    resources :payments
   end
 end
