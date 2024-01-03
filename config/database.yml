@@ -5,15 +5,22 @@ development:
   pool: 5
   username: hp
   password: PASSWORD
-  host: localhost
+  host: db # This should work within the Docker network
+
 test:
   adapter: postgresql
+  encoding: unicode
   database: my_database_test
   pool: 5
-  timeout: 5000
+  username: hp
+  password: PASSWORD
+  host: db # This should work within the Docker network
 
 production:
   adapter: postgresql
+  encoding: unicode
   database: my_database_production
   pool: 5
-  timeout: 5000
+  username: hp
+  password: PASSWORD
+  host: db # This should work within the Docker network

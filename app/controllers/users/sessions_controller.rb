@@ -14,7 +14,7 @@ class Users::SessionsController < Devise::SessionsController
     type = params[:type]
     case type
     when 'email'  
-      UserMailer.send_otp(user,code).deliver_later
+      UserMailer.send_otp(user,code).deliver_now
     when 'mobile'
       Twilio::SmsService.new(user.contact_no, user.code).call
     else
