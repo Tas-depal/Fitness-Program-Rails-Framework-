@@ -44,11 +44,7 @@ module Api
 
   # ..................Show category.........................
     def show
-      if @category
-        render json: @category
-      else
-        render json: { message: 'Data with #{params[:id]} does not exist..' }     
-      end    
+      render json: @category
     end
 
     private 
