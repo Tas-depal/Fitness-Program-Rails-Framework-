@@ -2,6 +2,8 @@ require 'rails_helper'
 require "swagger_helper"
 
 RSpec.describe "Categories", type: :request do
+	let!(:category) { create(:category) }
+
 	path '/api/categories' do
 		post 'Creates a category' do
 			tags 'Categories'
@@ -15,7 +17,7 @@ RSpec.describe "Categories", type: :request do
 			}
 
 			response '200', 'category created' do
-				let(:category) { { category_name: "Abc" } }
+				let(:category) { { category_name: 'Abc' } }
 				run_test! 
 			end
 
@@ -41,8 +43,33 @@ RSpec.describe "Categories", type: :request do
 				required: ['id', 'category_name']
 			}
 
-			response '200', 'category found' do  
-			  let(:id) { create(:category).id }
+			response '200', 'category found' do
+			  let(:id) { category.id }
+			  run_test!
+			end
+
+			response '200', 'category not found' do
+				let(:id) { 999 } # Assuming a category with ID 999 does not exist
+				run_test!
+			end
+		end
+	end
+
+	path '/api/categories/{id}' do
+		delete 'Deletes a category' do
+			tags 'Categories'
+			produces 'application/json'
+			parameter name: :id, in: :path, type: :string, schema:{ 
+				type: :object,
+				properties: {
+					id: { type: :integer },
+					category_name: { type: :string }
+				},
+				required: ['id', 'category_name']
+			}
+
+			response '200', 'category found' do
+			  let(:id) { category.id }
 			  run_test!
 			end
 
@@ -58,8 +85,7 @@ RSpec.describe "Categories", type: :request do
 			tags 'Categories'
 			produces 'application/json'
 
-			response '200', 'categories found' do  
-			  let(:category) { create(:category) }
+			response '200', 'categories found' do 
 			  run_test!
 			end
 

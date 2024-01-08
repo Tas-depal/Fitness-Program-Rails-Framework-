@@ -6,40 +6,27 @@ module Api
 
   # ..................Show all categories................... 
     def index
-      category=Category.all 
-      if category
-        render json: category
-      else
-        render json: { message: "There are no categories available.." }      
-      end
-    end
+      category = Category.all 
+      return render json: { message: "There are no categories available.." } if category.empty?    
+      return render json: category if category
+  end
 
   # ..................Create category......................
     def create
       category = Category.new(set_params)
-      if category.save
-        render json: category
-      else
-        render json: { error: category.errors.full_messages }
-      end
+      return render json: category if category.save
+      return render json: { error: category.errors.full_messages }
     end
 
   # ..................Update category......................
     def update
-      if @category.update(set_params)
-        render json: { message: 'Updated successfully', data: @category }
-      else
-        render json: { message: @category.errors.full_messages }      
-      end
+      return render json: { message: 'Updated successfully', data: @category } if @category.update(set_params)
+      return render json: { message: @category.errors.full_messages }      
     end
 
   # ..................Delete category......................
     def destroy
-      if @category.destroy
-        render json: { message: 'Deleted successfully', data: @category }
-      else
-        render json: { message: 'No such data exists to be deleted' }      
-      end
+      return render json: { message: 'Deleted successfully', data: @category } if @category.destroy
     end
 
   # ..................Show category.........................
