@@ -66,6 +66,7 @@ gem 'pg'
 
 # Gem for swagger
 gem 'rswag'
+gem 'dotenv-rails'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
