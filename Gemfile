@@ -70,6 +70,10 @@ gem 'pg'
 gem 'rswag'
 gem 'dotenv-rails'
 
+# Gem active admin themes
+gem 'active_admin_flat_skin'
+gem 'font-awesome-rails'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

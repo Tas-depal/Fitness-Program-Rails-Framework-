@@ -10,8 +10,9 @@ module Api
     def create
       user = User.new(set_params)
       return render json: { message: 'User Created', data: user } if user.save
+      token = jwt_encode(user_id: user.id)
 
-      render json: { errors: user.errors.full_messages }
+      render json: { errors: user.errors.full_messages, token: token }
     end
 
     # ..................Login user......................
@@ -33,7 +34,7 @@ module Api
 
       token = jwt_encode(user_id: user.id)
       BuyTimeWorker.perform_async(user.attributes)
-      render json: { message: 'Logged in successfully', token: }
+      render json: { message: 'Logged in successfully', token: token}
     end
 
     # ..................Update user......................
