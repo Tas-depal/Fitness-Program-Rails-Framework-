@@ -13,7 +13,8 @@ gem 'active_model_serializers'
 gem 'rubocop', require: false
 gem 'pundit'
 gem 'devise'
-gem 'devise-jwt'
+gem 'jwt'
+gem 'bcrypt'
 gem 'activeadmin'
 gem 'sass-rails'
 gem 'redis'
@@ -56,6 +57,7 @@ gem "rack-cors"
 # OmniAuth
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+# gem 'oauth2', '~> 1.4.9'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
 # Stripe

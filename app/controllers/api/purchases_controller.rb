@@ -6,7 +6,7 @@ module Api
 
 	# ..................Show purchased programs...............
 	  def index
-		  purchase = current_user.purchases
+		  purchase = @current_user.purchases
 		  if purchase.empty?
 	      render json: { message: 'No data found...' }
 		  else
@@ -16,7 +16,7 @@ module Api
 
 	# ..................Purchase program.......................
 		def create
-			purchase = current_user.purchases.new(set_params)
+			purchase = @current_user.purchases.new(set_params)
 			program = Program.find_by(status: 'active' , id: purchase.program_id)
 			if program
 		    if purchase.save
@@ -57,7 +57,7 @@ module Api
 		  end
 
 	  	def find_id
-				@purchase=current_user.purchases.find_by_id(params[:id])
+				@purchase=@current_user.purchases.find_by_id(params[:id])
 				unless @purchase
 	        render json: "Id not found.." 
 	      end   
