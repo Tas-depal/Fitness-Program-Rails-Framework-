@@ -10,9 +10,8 @@ module Api
     def create
       user = User.new(set_params)
       return render json: { message: 'User Created', data: user } if user.save
-      token = jwt_encode(user_id: user.id)
 
-      render json: { errors: user.errors.full_messages, token: token }
+      render json: { errors: user.errors.full_messages }
     end
 
     # ..................Login user......................
