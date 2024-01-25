@@ -1,12 +1,18 @@
 ActiveAdmin.register User do
-  permit_params :name, :email, :contact_no
+	permit_params :name, :email, :contact_no, :password_digest, :type
 
-  form do |f|
-    f.inputs do
-      f.input :name
-      f.input :email
-      f.input :contact_no
-    end
-    f.actions
-  end  
+	preserve_default_filters!
+
+	remove_filter :purchases, :programs
+
+	form do |f|
+		f.inputs do
+			f.input :name
+			f.input :email
+			f.input :contact_no
+			f.input :type
+			f.input :password_digest
+		end
+		f.actions
+	end
 end
