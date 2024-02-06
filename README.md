@@ -10,8 +10,7 @@ Things you may want to cover:
 
 * Requirements
 	- Ruby version
-		- Check ruby version, If not then install it.
-	 	- 3.2.2
+		- Check ruby version ie., 3.2.2, If not then install it
 	- Docker and docker compose must be installed
 	- Postgres must be installed
 	- Redis must be installed
